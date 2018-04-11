@@ -2,6 +2,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "watch": "nodemon index.js",
     "lint": "run-p lint:*",
     "lint:html": "htmlhint ./**/*.html",
     "lint:css": "stylelint ./**/*.css",
@@ -19,8 +20,14 @@
     "eslint-plugin-standard": "3.0.1",
     "htmlhint": "0.9.13",
     "husky": "0.14.3",
+    "nodemon": "^1.17.3",
     "npm-run-all": "4.1.1",
     "stylelint": "8.0.0",
     "stylelint-config-standard": "17.0.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "mongodb": "^3.0.6"
   }
 }
