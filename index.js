@@ -51,6 +51,48 @@ app.post('/notebook', (req, res) => {
   })
 })
 
+app.patch('/notebook/name/:name', (req, res) => {
+  MongoClient.connect('mongodb://localhost/notebook', (err, client) => {
+    if (err) {
+      console.log(err)
+      process.exit(1)
+    }
+    const db = client.db('notebook')
+    const notes = db.collection('notes')
+    notes.update(req.params, req.body, (err, result) => {
+      if (err) {
+        console.error(err)
+      }
+      else {
+        console.log(result)
+      }
+    })
+
+    client.close()
+  })
+})
+
+app.patch('/notebook/description/:description', (req, res) => {
+  MongoClient.connect('mongodb://localhost/notebook', (err, client) => {
+    if (err) {
+      console.log(err)
+      process.exit(1)
+    }
+    const db = client.db('notebook')
+    const notes = db.collection('notes')
+    notes.update(req.params, req.body, (err, result) => {
+      if (err) {
+        console.error(err)
+      }
+      else {
+        console.log(result)
+      }
+    })
+
+    client.close()
+  })
+})
+
 app.listen(3000, () => {
   console.log('Listening on 3000!')
 })
