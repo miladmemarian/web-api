@@ -22,6 +22,7 @@ app.get('/notebook', (req, res) => {
       }
       else {
         console.log(result)
+        res.sendStatus(200)
       }
 
       client.close()
@@ -35,6 +36,7 @@ app.post('/notebook', (req, res) => {
   MongoClient.connect('mongodb://localhost/notebook', (err, client) => {
     if (err) {
       console.log(err)
+      res.sendStatus(500)
       process.exit(1)
     }
     const db = client.db('notebook')
@@ -44,7 +46,7 @@ app.post('/notebook', (req, res) => {
         console.error(err)
       }
       else {
-        console.log(result)
+        res.sendStatus(201)
       }
       client.close()
     })
@@ -55,6 +57,7 @@ app.patch('/notebook/name/:name', (req, res) => {
   MongoClient.connect('mongodb://localhost/notebook', (err, client) => {
     if (err) {
       console.log(err)
+      res.sendStatus(500)
       process.exit(1)
     }
     const db = client.db('notebook')
@@ -64,7 +67,7 @@ app.patch('/notebook/name/:name', (req, res) => {
         console.error(err)
       }
       else {
-        console.log(result)
+        res.sendStatus(200)
       }
     })
 
@@ -76,6 +79,7 @@ app.patch('/notebook/description/:description', (req, res) => {
   MongoClient.connect('mongodb://localhost/notebook', (err, client) => {
     if (err) {
       console.log(err)
+      res.sendStatus(500)
       process.exit(1)
     }
     const db = client.db('notebook')
@@ -85,7 +89,7 @@ app.patch('/notebook/description/:description', (req, res) => {
         console.error(err)
       }
       else {
-        console.log(result)
+        res.sendStatus(200)
       }
     })
 
@@ -97,6 +101,7 @@ app.delete('/notebook/name/:name', (req, res) => {
   MongoClient.connect('mongodb://localhost/notebook', (err, client) => {
     if (err) {
       console.log(err)
+      res.sendStatus(500)
       process.exit(1)
     }
     const db = client.db('notebook')
@@ -106,7 +111,7 @@ app.delete('/notebook/name/:name', (req, res) => {
         console.error(err)
       }
       else {
-        console.log(result)
+        res.sendStatus(200)
       }
     })
 
