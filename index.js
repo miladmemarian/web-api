@@ -101,7 +101,7 @@ app.delete('/notebook/name/:name', (req, res) => {
     }
     const db = client.db('notebook')
     const notes = db.collection('notes')
-    notes.remove(req.params, req.body, (err, result) => {
+    notes.remove(req.params, (err, result) => {
       if (err) {
         console.error(err)
       }
