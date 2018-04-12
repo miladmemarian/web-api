@@ -62,14 +62,18 @@ app.patch('/notebook/id/:id', (req, res) => {
     }
     const db = client.db('notebook')
     const notes = db.collection('notes')
-    notes.update(req.params, req.body, (err, result) => {
-      if (err) {
-        console.error(err)
+    notes.update(
+      req.params,
+      { $set: { note: req.body.note } },
+      (err, result) => {
+        if (err) {
+          console.error(err)
+        }
+        else {
+          res.sendStatus(200)
+        }
       }
-      else {
-        res.sendStatus(200)
-      }
-    })
+    )
 
     client.close()
   })
