@@ -7,6 +7,28 @@ const bodyParser = require('body-parser')
 const app = express()
 const jsonParser = bodyParser.json()
 
+app.get('/notebook', (req, res) => {
+  MongoClient.connect('mongodb://localhost/notebook', (err, client) => {
+    if (err) {
+      console.log(err)
+      process.exit(1)
+    }
+    const db = client.db('notebook')
+    const notes = db.collection('notes')
+
+    notes.find().toArray((err, result) => {
+      if (err) {
+        console.error(err)
+      }
+      else {
+        console.log(result)
+      }
+
+      client.close()
+    })
+  })
+})
+
 app.use(jsonParser)
 
 app.post('/notebook', (req, res) => {
