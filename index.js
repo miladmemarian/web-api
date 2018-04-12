@@ -117,28 +117,3 @@ app.delete('/notebook/name/:name', (req, res) => {
 app.listen(3000, () => {
   console.log('Listening on 3000!')
 })
-
-app.delete('/notebook/description/:description', (req, res) => {
-  MongoClient.connect('mongodb://localhost/notebook', (err, client) => {
-    if (err) {
-      console.log(err)
-      process.exit(1)
-    }
-    const db = client.db('notebook')
-    const notes = db.collection('notes')
-    notes.remove(req.params, req.body, (err, result) => {
-      if (err) {
-        console.error(err)
-      }
-      else {
-        console.log(result)
-      }
-    })
-
-    client.close()
-  })
-})
-
-app.listen(3000, () => {
-  console.log('Listening on 3000!')
-})
