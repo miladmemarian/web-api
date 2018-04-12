@@ -53,7 +53,7 @@ app.post('/notebook', (req, res) => {
   })
 })
 
-app.patch('/notebook/name/:name', (req, res) => {
+app.patch('/notebook/id/:id', (req, res) => {
   MongoClient.connect('mongodb://localhost/notebook', (err, client) => {
     if (err) {
       console.log(err)
@@ -75,29 +75,7 @@ app.patch('/notebook/name/:name', (req, res) => {
   })
 })
 
-app.patch('/notebook/description/:description', (req, res) => {
-  MongoClient.connect('mongodb://localhost/notebook', (err, client) => {
-    if (err) {
-      console.log(err)
-      res.sendStatus(500)
-      process.exit(1)
-    }
-    const db = client.db('notebook')
-    const notes = db.collection('notes')
-    notes.update(req.params, req.body, (err, result) => {
-      if (err) {
-        console.error(err)
-      }
-      else {
-        res.sendStatus(200)
-      }
-    })
-
-    client.close()
-  })
-})
-
-app.delete('/notebook/name/:name', (req, res) => {
+app.delete('/notebook/id/:id', (req, res) => {
   MongoClient.connect('mongodb://localhost/notebook', (err, client) => {
     if (err) {
       console.log(err)
